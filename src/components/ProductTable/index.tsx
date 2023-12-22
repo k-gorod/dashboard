@@ -53,7 +53,7 @@ const columns: ColumnsType<DataType> = [
 const ProductTable: FC<IProductTable> = () => {
   const { open, drawerContent, setDrawerContent, toggleDrawer } = drawerStore;
 
-  const { getTableData, tableData } = tableStore;
+  const { getTableData, tableData, sortBy } = tableStore;
 
   const onFilterClick = (): void => {
     toggleDrawer();
@@ -72,6 +72,8 @@ const ProductTable: FC<IProductTable> = () => {
   useEffect(() => {
     console.log(tableData);
   }, [tableData]);
+
+  useEffect(() => {}, [sortBy]);
 
   useEffect(() => {
     getTableData();

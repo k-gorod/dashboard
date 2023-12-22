@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, toJS } from "mobx";
 
 export interface DataType {
   key: React.Key;
@@ -26,8 +26,9 @@ class TableStore {
   setSortBy = (sortBy: keyof DataType): void => {
     this.sortBy = sortBy;
 
-    this.setData(
+    this.tableData = toJS(
       this.tableData.sort((a: DataType, b: DataType) => {
+        if (a[sortBy] === b[sortBy]) return 0;
         return a[sortBy] > b[sortBy] ? 1 : -1;
       })
     );
